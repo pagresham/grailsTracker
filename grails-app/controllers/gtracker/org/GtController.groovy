@@ -1,5 +1,9 @@
 package gtracker.org
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+
 import grails.core.GrailsApplication
 import groovy.json.*
 
@@ -9,7 +13,8 @@ class GtController {
     def slurper = new JsonSlurper()
 
 
-    UserService userService = new UserService()
+    UserService userService
+    SecurityService securityService
     String theAuthor = grailsApplication.config.getProperty('info.app.author')
 
     def appinfo() {
@@ -75,26 +80,40 @@ class GtController {
         render view: 'home', model: [user: user]
     }
 
-    def newuser() {
-        def allusers = User.findAll()
-        render allusers.size()
-        allusers.each {
-            println ""
-            println "New User"
-            println it.uname
-            println it.passwdHash
-            println ""
-            println "Recips for ${it.uname}"
-            it.recips.each {
-                println it.getFullName()
+    /**
+     * Handle submission of new user from welcome.gsp
+     * Recieve inputs, validate, save to DB, redirect to home page, or ask to log in
+     */
+    def newAccount() {
+        if(params.uname && params.passwd && params.passwdrpt) {
+            def errorMsgs = [:]
+            def uname = params.uname
+            def passwd = passwd
+            def passwdrpt = passwdrpt
+            if (passwd != passwdrpt) {
+//                Send message into view and allow try again
+                errorMsgs['passwd'] = "Passwords Do not Match"
+            } else {
+                // Hash password //
+                def newUser = new User(uname: uname, )
             }
+
+
         }
+    }
 
-        def recips = Recip.findAll()
-        render recips.size()
-
-        def firstUser = allusers.get(0)
-        render firstUser.uname
+    def testsecure () {
+        def t1 = securityService.getSecurePassword("test2")
+        def t2 = securityService.getSecurePassword("test2", t1.salt)
+        if(t1.generatedPassword == t2.generatedPassword) {
+            log.info("Passwords Match")
+        } else {
+            log.info("Passwords DO NOT Match")
+        }
+        render "${t1.generatedPassword} <br>"
+        render "${t1.salt} <br>"
+        render "${t2.generatedPassword} <br>"
+        render "${t2.salt} <br>"
     }
 
 

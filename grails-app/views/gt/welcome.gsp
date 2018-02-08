@@ -34,8 +34,27 @@
                 <div>
                     <g:submitButton name="submit-validate"/>
                 </div>
-                
             </g:form>
+        </div>
+        <div>
+            <h4>Create a new Account</h4>
+            <div>
+                <g:form action="newAccount" controller="gt" method="post" id="newAccount-form">
+                    <div>
+                        <label for="uname">UserName:</label>
+                        <input type="text" id="uname" name="uname">
+                    </div>
+                    <div>
+                        <label for="passwd">Password:</label>
+                        <input type="password" id="passwd" name="passwd">
+                    </div>
+                    <div>
+                        <label for="passwdrpt">Repeat Password:</label>
+                        <input type="password" id="passwdrpt" name="passwdrpt">
+                    </div>
+                    <g:submitButton class="btn btn-success btn-sm" name="submituser" value="Submit User"/>
+                </g:form>
+            </div>
         </div>
     </section>
 </div>
