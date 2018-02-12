@@ -12,7 +12,7 @@
     <!--<asset:stylesheet src="application.css"/>-->
     <asset:stylesheet src="bootstrap_4/bootstrap.css"/>
     <asset:stylesheet src="font-awesome-4.7.0/css/font-awesome.min.css"/>
-    <asset:stylesheet src="gtracker.main.css"/>
+    <asset:stylesheet src="gtracker/style.css"/>
     <g:layoutHead/>
 </head>
 
@@ -115,9 +115,7 @@
 </div> <!-- end #page -->
     <div>
         <footer class="container">
-            <div class="text-success">
-                <p class="text-success">Brought to you by: ${author}</p>
-            </div>
+
         </footer>
     </div>
 
@@ -125,5 +123,6 @@
 <!-- Popper is included in the bundle  -->
 <asset:javascript src="jquery-3.3.1.min.js"/>
 <asset:javascript src="bootstrap_js/bootstrap.bundle.js"/>
+<asset:javascript src="gtracker/welcome.js"/>
 </body>
 </html>

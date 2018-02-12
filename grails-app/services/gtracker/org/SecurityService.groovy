@@ -14,14 +14,19 @@ class SecurityService {
 
     }
 
-
+    /**
+     * Returns hashed pw and salt used
+     * If no salt is passed, random salt is generated
+     * If salt is passed, that salt is used to create pw
+     * See Link: https://howtodoinjava.com/security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
+     * @return Map [ 'salt': salt, 'generatedPassword': generatedPassword ]
+     */
     def getSecurePassword(String passwdToHash, salt = null) {
         salt = (salt) ?: getSalt()
         def securePasswdAndSalt = get_SHA_1_SecurePassword(passwdToHash, salt)
-        log.info("Passwd to Hash: ${passwdToHash}")
-        log.info("Secure Hashed Passwd: ${securePasswdAndSalt.generatedPassword}")
-        log.info("Hash Length: ${securePasswdAndSalt.generatedPassword.size()}")
-
+//        log.info("Passwd to Hash: ${passwdToHash}")
+//        log.info("Secure Hashed Passwd: ${securePasswdAndSalt.generatedPassword}")
+//        log.info("Hash Length: ${securePasswdAndSalt.generatedPassword.size()}")
         return securePasswdAndSalt
     }
 

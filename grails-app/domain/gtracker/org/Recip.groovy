@@ -23,6 +23,7 @@ class Recip {
 
     Double getGiftTotal() {
         def sum = this.gifts.price.sum()
+        sum = sum.round(2)
         return sum
     }
 }
